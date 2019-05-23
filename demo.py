@@ -48,11 +48,12 @@ if __name__ == "__main__":
     cosine = np.dot(features, x)
     cosine = np.clip(cosine, -1, 1)
     print('cosine.shape: ' + str(cosine.shape))
-    max_index = np.argmax(cosine)
+    max_index = int(np.argmax(cosine))
     max_value = cosine[max_index]
     print('max_index: ' + str(max_index))
     print('max_value: ' + str(max_value))
-    print(names[max_index])
+    print('name: ' + names[max_index])
+    print('file: ' + files[max_index])
     theta = math.acos(max_value)
     theta = theta * 180 / math.pi
 
