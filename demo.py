@@ -12,14 +12,17 @@ if __name__ == "__main__":
         stars = pickle.load(file)
 
     features = np.empty((num_files, 512), dtype=np.float32)
+    files = []
     names = []
 
     i = 0
     for star in stars:
         name = star['name']
+        file_list = star['file_list']
         feature_list = star['feature_list']
-        for feature in feature_list:
+        for idx, feature in enumerate(feature_list):
             features[i] = feature
+            files.append(file_list[idx])
             names.append(name)
             i += 1
 
