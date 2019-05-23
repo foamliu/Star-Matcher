@@ -33,7 +33,7 @@ if __name__ == "__main__":
     model = model.to(device)
     model.eval()
 
-    test_fn = 'images/test_img_1.jpg'
+    test_fn = 'images/test_img_3.jpg'
     img = get_image(test_fn)
     imgs = torch.zeros([1, 3, 112, 112], dtype=torch.float)
     imgs[0] = img
