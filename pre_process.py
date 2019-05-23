@@ -5,19 +5,22 @@ from shutil import copyfile
 from config import IMG_FOLDER
 
 if __name__ == "__main__":
+    IMG_FOLDER_OLD = 'data/weiweiimage_old'
+
     stars = []
-    dir_list = [d for d in os.listdir(IMG_FOLDER) if
-                os.path.isdir(os.path.join(IMG_FOLDER, d))]
+    dir_list = [d for d in os.listdir(IMG_FOLDER_OLD) if
+                os.path.isdir(os.path.join(IMG_FOLDER_OLD, d))]
     for i, d in enumerate(dir_list):
-        dir = os.path.join(IMG_FOLDER, d)
-        new_dir = dir.replace(d, str(i))
+        dir = os.path.join(IMG_FOLDER_OLD, d)
+        new_dir = os.path.join(IMG_FOLDER, str(i))
         if not os.path.isdir(new_dir):
             os.makedirs(new_dir)
 
-        file_list = [os.path.join(dir, f) for f in os.listdir(dir) if f.lower().endswith('.jpg')]
+        file_list = [f for f in os.listdir(dir) if f.lower().endswith('.jpg')]
         new_list = []
-        for src in file_list:
-            dst = src.replace(d + '_', '').replace(d, str(i)).replace('\\', '/')
+        for f in file_list:
+            src = os.path.join(dir, f)
+            dst = os.path.join(new_dir, f.replace(d + '_', '')).replace('\\', '/')
             new_list.append(dst)
             copyfile(src, dst)
         stars.append({'name': d, 'file_list': new_list})
