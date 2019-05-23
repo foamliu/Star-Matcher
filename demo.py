@@ -50,7 +50,7 @@ if __name__ == "__main__":
     print('max_index: ' + str(max_index))
     print('max_value: ' + str(max_value))
     print(names[max_index])
-    theta = math.acos(cosine)
+    theta = math.acos(max_value)
     theta = theta * 180 / math.pi
 
     print('theta: ' + str(theta))
