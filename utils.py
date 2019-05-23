@@ -3,6 +3,7 @@ import math
 import cv2 as cv
 import numpy as np
 from PIL import Image
+from scipy.stats import norm
 from torchvision import transforms
 
 from align_faces import get_reference_facial_points, warp_and_crop_face
@@ -106,3 +107,10 @@ def get_image(filename):
     # cv.imwrite(filename, pic)
 
     return img
+
+
+def get_prob(theta):
+    prob_0 = norm.pdf(theta, mu_0, sigma_0)
+    prob_1 = norm.pdf(theta, mu_1, sigma_1)
+    total = prob_0 + prob_1
+    return prob_1 / total

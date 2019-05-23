@@ -1,10 +1,11 @@
+import math
 import pickle
 
 import numpy as np
 import torch
 
 from config import device, pickle_file, num_files
-from utils import get_image
+from utils import get_image, get_prob
 
 if __name__ == "__main__":
     with open(pickle_file, 'rb') as file:
@@ -49,3 +50,9 @@ if __name__ == "__main__":
     print('max_index: ' + str(max_index))
     print('max_value: ' + str(max_value))
     print(names[max_index])
+    theta = math.acos(cosine)
+    theta = theta * 180 / math.pi
+
+    print('theta: ' + str(theta))
+    prob = get_prob(theta)
+    print('prob: ' + str(prob))
