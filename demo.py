@@ -29,6 +29,13 @@ if __name__ == "__main__":
     print(features.shape)
     assert (len(names) == num_files)
 
+    with open('data/stars.pkl', 'wb') as file:
+        save = dict()
+        save['features'] = features
+        save['files'] = files
+        save['names'] = names
+        pickle.dump(save, file)
+
     checkpoint = 'BEST_checkpoint.tar'
     print('loading model: {}...'.format(checkpoint))
     checkpoint = torch.load(checkpoint)
