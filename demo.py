@@ -4,37 +4,15 @@ import pickle
 import numpy as np
 import torch
 
-from config import device, pickle_file, num_files
+from config import device, star_file
 from utils import get_image, get_prob
 
 if __name__ == "__main__":
-    with open(pickle_file, 'rb') as file:
-        stars = pickle.load(file)
-
-    features = np.empty((num_files, 512), dtype=np.float32)
-    files = []
-    names = []
-
-    i = 0
-    for star in stars:
-        name = star['name']
-        file_list = star['file_list']
-        feature_list = star['feature_list']
-        for idx, feature in enumerate(feature_list):
-            features[i] = feature
-            files.append(file_list[idx])
-            names.append(name)
-            i += 1
-
-    print(features.shape)
-    assert (len(names) == num_files)
-
-    with open('data/stars.pkl', 'wb') as file:
-        save = dict()
-        save['features'] = features
-        save['files'] = files
-        save['names'] = names
-        pickle.dump(save, file)
+    with open(star_file, 'rb') as file:
+        data = pickle.load(file)
+        features = data['features']
+        files = data['files']
+        names = data['names']
 
     checkpoint = 'BEST_checkpoint.tar'
     print('loading model: {}...'.format(checkpoint))

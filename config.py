@@ -9,4 +9,5 @@ num_files = 2165
 DATA_DIR = 'data'
 IMG_FOLDER = 'data/weiweiimage'
 
-pickle_file = DATA_DIR + '/' + 'stars.pkl'
+pickle_file = DATA_DIR + '/' + 'weiweiimage.pkl'
+star_file = DATA_DIR + '/' + 'stars.pkl'

@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from config import device, pickle_file
+from config import device, pickle_file, star_file
 from utils import get_image, FaceNotFoundError
 
 
@@ -30,6 +30,7 @@ if __name__ == "__main__":
     num_files = count_files(stars)
     print('num_files: ' + str(num_files))
 
+    print('Generating features...')
     for star in tqdm(stars):
         name = star['name']
         file_list = star['file_list']
@@ -57,3 +58,32 @@ if __name__ == "__main__":
 
     num_files = count_files(stars)
     print('num_files: ' + str(num_files))
+
+    with open(pickle_file, 'rb') as file:
+        stars = pickle.load(file)
+
+    features = np.empty((num_files, 512), dtype=np.float32)
+    files = []
+    names = []
+
+    i = 0
+    print('Generating stars.pkl...')
+    for star in stars:
+        name = star['name']
+        file_list = star['file_list']
+        feature_list = star['feature_list']
+        for idx, feature in enumerate(feature_list):
+            features[i] = feature
+            files.append(file_list[idx])
+            names.append(name)
+            i += 1
+
+    print(features.shape)
+    assert (len(names) == num_files)
+
+    with open(star_file, 'wb') as file:
+        save = dict()
+        save['features'] = features
+        save['files'] = files
+        save['names'] = names
+        pickle.dump(save, file)
