@@ -10,5 +10,5 @@ def extract(filename):
 
 
 if __name__ == "__main__":
-    if not os.path.isdir('data/weiweiimage'):
-        extract('data/weiweiimage.zip')
+    if not os.path.isdir('data/weiweiimage_old'):
+        extract('data/weiweiimage_old.zip')
