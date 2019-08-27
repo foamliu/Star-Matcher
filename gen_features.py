@@ -47,6 +47,7 @@ if __name__ == "__main__":
                     x = feature / np.linalg.norm(feature)
                     feature_list.append(x)
             except FaceNotFoundError:
+                print(f)
                 to_remove.append(f)
 
         for f in to_remove:
