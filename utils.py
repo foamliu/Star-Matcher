@@ -85,8 +85,8 @@ def get_central_face_attributes(full_path):
 
     except KeyboardInterrupt:
         raise
-    except:
-        pass
+    except Exception as err:
+        print(err)
     return False, None, None
 
 
